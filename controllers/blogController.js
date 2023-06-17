@@ -5,7 +5,7 @@ const userModel = require("../models/userModel");
 //GET ALL BLOGS
 exports.getAllBlogsController = async (req, res) => {
   try {
-    const blogs = await blogModel.find({});
+    const blogs = await blogModel.find({}).populate('user');
     if (!blogs) {
       return res.status(200).send({
         success: false,
@@ -159,7 +159,7 @@ exports.userBlogController = async (req, res) => {
         message: "blogs not found with this id",
       });
     }
-    return res.status(404).send({
+    return res.status(200).send({
       success: true,
       message: "user blogs",
       userBlog,

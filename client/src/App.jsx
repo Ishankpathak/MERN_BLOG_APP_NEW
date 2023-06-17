@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Blogs from "./pages/Blogs.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import UserBlogs from "./pages/UserBlogs";
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Blogs />} />
+        <Route path="/my-blogs" element={<UserBlogs />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
