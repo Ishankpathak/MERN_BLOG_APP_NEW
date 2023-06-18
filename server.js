@@ -4,13 +4,21 @@ const morgan = require("morgan");
 const colors = require("colors");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db.js");
+const path = require("path");
 
 //dotenv
 dotenv.config();
 
 //router import
 const userRoutes = require("./routes/userRoutes.js");
-const blogRoutes = require('./routes/blogRoutes.js')
+const blogRoutes = require("./routes/blogRoutes.js");
+
+//static files
+app.use(express.static(path.join(__dirname, "./client/build")));
+
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
 
 //mongodb connection
 connectDB();
