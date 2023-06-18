@@ -25,13 +25,9 @@ const Blogs = () => {
   }, []);
   return (
     <div className="blogs-container">
-      {loading ? (
-        <div className="spinner-border text-secondary mt-3" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      ) : (
+      {
         <>
-          {blogs ? (
+          {blogs &&
             blogs.map((blog, index) => (
               <div key={uuidv4()} className="blog-content">
                 <BlogCard
@@ -47,12 +43,9 @@ const Blogs = () => {
                   time={blog?.createdAt}
                 />
               </div>
-            ))
-          ) : (
-            <h1>No Blogs</h1>
-          )}
+            ))}
         </>
-      )}
+      }
     </div>
   );
 };
