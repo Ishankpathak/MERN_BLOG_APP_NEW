@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -9,7 +9,8 @@ import Swal from "sweetalert2";
 
 const Header = () => {
   //global state
-  const isLogin = useSelector((state) => state.isLogin);
+  let isLogin = useSelector((state) => state.isLogin);
+  isLogin = isLogin || localStorage.getItem("userId");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // console.log(isLogin);
@@ -26,11 +27,13 @@ const Header = () => {
           text: "Logout Successfully",
         });
         navigate("/login");
+        localStorage.clear();
       }
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-primary text-lg text-light">
@@ -68,6 +71,11 @@ const Header = () => {
                       My Blogs
                     </Link>
                   </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/create-blog">
+                      Create Blog
+                    </Link>
+                  </li>
                 </ul>
               )}
 
@@ -87,7 +95,7 @@ const Header = () => {
               )}
 
               {isLogin && (
-                <li className="nav-item">
+                <li className="nav-item mx-auto">
                   <Link
                     className="nav-link"
                     tp="/logout"

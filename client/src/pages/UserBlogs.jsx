@@ -38,6 +38,8 @@ const UserBlogs = () => {
               return (
                 <div key={blog._id}>
                   <BlogCard
+                    id={blog._id}
+                    isUser={true}
                     title={blog.title}
                     description={blog.description}
                     image={blog.image}

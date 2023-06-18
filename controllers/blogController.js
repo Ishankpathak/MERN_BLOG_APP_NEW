@@ -5,7 +5,7 @@ const userModel = require("../models/userModel");
 //GET ALL BLOGS
 exports.getAllBlogsController = async (req, res) => {
   try {
-    const blogs = await blogModel.find({}).populate('user');
+    const blogs = await blogModel.find({}).populate("user");
     if (!blogs) {
       return res.status(200).send({
         success: false,
@@ -33,6 +33,14 @@ exports.createBlogController = async (req, res) => {
   try {
     const { title, description, image, user } = req.body;
     //validation
+     // Validate user ObjectId
+     if (!mongoose.Types.ObjectId.isValid(user)) {
+      return res.status(400).send({
+        success: false,
+        message: 'Invalid user ID',
+      });
+    }
+    
     if (!title || !description || !image || !user) {
       return res.status(400).send({
         success: false,
@@ -125,7 +133,7 @@ exports.getBlogByIdController = async (req, res) => {
 exports.deleteBlogController = async (req, res) => {
   try {
     const blog = await blogModel
-      .findOneAndDelete(req.params.id)
+      .findByIdAndDelete(req.params.id)
       .populate("user");
     if (!blog) {
       return res.status(404).send({

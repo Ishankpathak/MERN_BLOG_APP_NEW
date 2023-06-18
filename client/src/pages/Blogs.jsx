@@ -31,19 +31,26 @@ const Blogs = () => {
         </div>
       ) : (
         <>
-          {blogs &&
+          {blogs ? (
             blogs.map((blog, index) => (
-              <div key={uuidv4()}>
+              <div key={uuidv4()} className="blog-content">
                 <BlogCard
+                  id={blog?._id}
+                  isUser={
+                    localStorage.getItem("userId") === blog?.user?._id || ""
+                  }
                   key={index}
-                  title={blog.title}
-                  description={blog.description}
-                  image={blog.image}
-                  username={blog.user.username}
-                  time={blog.createdAt}
+                  title={blog?.title}
+                  description={blog?.description}
+                  image={blog?.image}
+                  username={blog?.user?.username}
+                  time={blog?.createdAt}
                 />
               </div>
-            ))}
+            ))
+          ) : (
+            <h1>No Blogs</h1>
+          )}
         </>
       )}
     </div>
