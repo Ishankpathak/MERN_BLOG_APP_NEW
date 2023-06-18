@@ -26,7 +26,7 @@ const UserBlogs = () => {
   return (
     <div className="blogs-container">
       <>
-        {blogs &&
+        {blogs.length > 0 ? (
           blogs.map((blog) => {
             return (
               <div key={blog._id}>
@@ -41,7 +41,10 @@ const UserBlogs = () => {
                 />
               </div>
             );
-          })}
+          })
+        ) : (
+          <div className="mt-5">You have Not Created any blog</div>
+        )}
       </>
     </div>
   );
