@@ -6,18 +6,16 @@ import { v4 as uuidv4 } from "uuid";
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
+
   //get blogs
   const getAllBlogs = async () => {
     try {
       const { data } = await axios.get("/api/v1/blog/all-blog");
       if (data?.success) {
         setBlogs(data?.blogs);
-        setLoading(false);
       }
     } catch (error) {
       console.log(error);
-      setLoading(false);
     }
   };
   useEffect(() => {

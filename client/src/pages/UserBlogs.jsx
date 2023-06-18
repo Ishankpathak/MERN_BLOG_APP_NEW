@@ -28,9 +28,7 @@ const UserBlogs = () => {
   return (
     <div className="blogs-container">
       {loading ? (
-        <div className="spinner-border text-secondary mt-3" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
+        <></>
       ) : (
         <>
           {blogs && blogs.length > 0 ? (
