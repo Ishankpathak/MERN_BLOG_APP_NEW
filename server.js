@@ -9,6 +9,12 @@ const path = require("path");
 //dotenv
 dotenv.config();
 
+//mongodb connection
+connectDB();
+
+//rest object
+const app = express();
+
 //router import
 const userRoutes = require("./routes/userRoutes.js");
 const blogRoutes = require("./routes/blogRoutes.js");
@@ -19,12 +25,6 @@ app.use(express.static(path.join(__dirname, "./client/build")));
 app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
-
-//mongodb connection
-connectDB();
-
-//rest object
-const app = express();
 
 //middlewares
 app.use(cors());
