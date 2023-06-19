@@ -21,19 +21,23 @@ const BlogCard = ({
   const handleDelete = async () => {
     try {
       const { data } = await axios.delete(`/api/v1/blog/delete-blog/${id}`);
-      const confirmed = window.confirm("Are you sure you want to Delete?");
-      if (confirmed) {
-        if (data?.success) {
-          Swal.fire({
-            text: "Blog Deleted Successfully",
-          });
-          window.location.reload();
-        }
+
+      if (data?.success) {
+        Swal.fire({
+          text: "Blog Deleted Successfully",
+        });
+        window.location.reload();
+      } else {
+        Swal.fire({
+          text: "Failed to delete the blog",
+          icon: "error",
+        });
       }
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <div className="card-main">
       <div className="card">
